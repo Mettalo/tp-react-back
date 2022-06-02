@@ -8,10 +8,12 @@ export class TaskService {
 
   constructor(@InjectModel(Task.name) private taskModel: Model<TaskDocument>) {}
 
-  private tasks: Array<Task> = [];
-
-  Create(task: Task): Promise<TaskDocument>{
+  async Create(task: Task): Promise<TaskDocument>{
     const newTask = new this.taskModel(task);
     return newTask.save();
+  }
+
+  async ListAll(): Promise<TaskDocument[]>{
+    return this.taskModel.find();
   }
 }
