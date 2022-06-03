@@ -16,4 +16,12 @@ export class TaskService {
   async ListAll(): Promise<TaskDocument[]>{
     return this.taskModel.find();
   }
+
+  async Delete(id: string): Promise<TaskDocument> {
+    return this.taskModel.findByIdAndDelete(id);
+  }
+
+  async Edit(id: string, task : Task): Promise<TaskDocument> {
+    return this.taskModel.findByIdAndUpdate(id, task, {new: true})
+  }
 }

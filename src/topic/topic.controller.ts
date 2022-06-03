@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Topic, TopicDocument } from './topic.schema';
 import { TopicService } from './topic.service';
 
@@ -14,4 +14,15 @@ export class TopicController {
   @Get()
   async ListAll(): Promise<TopicDocument[]> {
     return this.topicService.ListAll();
-  }}
+  }
+
+  @Delete(':id')
+  async Delete(@Param('id') id: string): Promise<TopicDocument>{
+    return this.topicService.Delete(id);
+  }
+
+  @Patch(':id')
+  async Edit(@Param('id') id: string, @Body() topic: Topic): Promise<TopicDocument>{
+    return this.topicService.Edit(id, topic)
+  }
+}
