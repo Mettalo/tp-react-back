@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+import { Topic } from 'src/topic/topic.schema';
 
 export type TaskDocument = Task & Document;
 
@@ -16,6 +17,12 @@ export class Task {
 
   @Prop()
   priority: number;
+
+  @Prop({
+    ref: Topic.name,
+    type: mongoose.Schema.Types.ObjectId
+  })
+  topicId: mongoose.ObjectId
 
 }
 
