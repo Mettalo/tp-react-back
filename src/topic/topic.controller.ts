@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { CreateTopicDto } from './dto/create-topic.dto';
 import { Topic, TopicDocument } from './topic.schema';
 import { TopicService } from './topic.service';
 
@@ -7,8 +8,8 @@ export class TopicController {
   constructor(private topicService: TopicService){}
 
   @Post()
-  Create(@Body() createTopicBody: Topic): Promise<TopicDocument> {
-    return this.topicService.Create(createTopicBody);
+  Create(@Body() createTopicDto: CreateTopicDto): Promise<TopicDocument> {
+    return this.topicService.Create(createTopicDto);
   }
 
   @Get()
